@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<head>
+  <title>
+    Efficient file uploader
+  </title>
+</head>
+
+<body>
+  <h1 style="color: green;">
+    File uploader
+  </h1>
+  <form action="/" method="post" enctype="multipart/form-data">
+    <label for="inputTitle">File</label>
+    <input type="file" id="file" name="file" required>
+    <button type="submit">Upload</button>
+  </form>
+  <hr>
+  <script>
+    const fileInput = document.querySelector('#fileInput');
+    fileInput?.addEventListener('change', async (e) => {
+      const file = e.target.files?.[0];
+      if (file) {
+        const uploader = new FileUploader(file);
+        try {
+          await uploader.uploadFile();
+          console.log('Upload completed!');
+        } catch (error) {
+          console.error('Upload failed:', error);
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
